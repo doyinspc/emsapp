@@ -7,7 +7,7 @@ const PageFixed = ({children}) => {
   return (
     <SafeAreaView className={customStyles.safearea}>
         {children}
-  </SafeAreaView>
+    </SafeAreaView>
   )
 }
 export default PageFixed

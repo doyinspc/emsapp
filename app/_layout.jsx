@@ -1,9 +1,10 @@
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
-import React, { useEffect, createContext } from "react";
+import { Stack } from "expo-router";
+import React, { useEffect, createContext, useCallback } from "react";
 import { useColorScheme } from 'react-native';
 import { Colors } from './../constants/Colors';
 import Loading from './../components/Loading'
+//import * as SplashScreen from 'expo-splash-screen'
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
@@ -36,12 +37,11 @@ const CustomDark = {...MD3DarkTheme, colors:Colors.dark}
 const CombinedDefaultTheme = merge(LightTheme, CustomDefault);
 const CombinedDarkTheme = merge(DarkTheme, CustomDark );
 
-SplashScreen.preventAutoHideAsync()
+//SplashScreen.preventAutoHideAsync();
 export const DBContext = createContext(undefined)
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-
   const paperTheme =
   colorScheme === 'dark'
     ? CombinedDarkTheme
@@ -65,23 +65,28 @@ export default function RootLayout() {
      'sourcesansbold':require('./../assets/fonts/SourceSans3-SemiBold.ttf'),
    })
 
+   
+   
+
    useEffect(() => {
-     if(error)throw error;
-     if( fontsLoaded )SplashScreen.hideAsync();
+     //const load_file = async () => await SplashScreen.hideAsync();
+     if(error) {
+      throw error; 
+      };
+    //  if( fontsLoaded ){load_file()}
    }, [fontsLoaded, error])
 
-
-   if(!fontsLoaded && !error ) return null;
-
-   
-  return (
+   if(!fontsLoaded && error )
+    { return null; }
+  else{
+      return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={paperTheme}>
       <DBContext.Provider value={{asd:123}}>
         <GlobalContextProvider >
           <React.Suspense fallback={<Loading />}>
             <Stack>
-              <Stack.Screen name="index" options={{headerShown:false}} />
+              <Stack.Screen name="index" index options={{headerShown:false}} />
               <Stack.Screen name="auth" options={{headerShown:false}} />
               <Stack.Screen name="screens" options={{headerShown:false}} />
               <Stack.Screen name="(tabs)" options={{headerShown:false}} />
@@ -93,4 +98,4 @@ export default function RootLayout() {
       </ThemeProvider>
     </PaperProvider>
   );
-}
+}}

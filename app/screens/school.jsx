@@ -97,7 +97,7 @@ const school = () => {
           </View>
           <View>
             <List.Item
-                title={()=><Text style={customStyles.listHeader}>{`${surname || ''} ${firstname || ''}`}</Text>}
+                title={()=><Text style={customStyles.listHeader}>{`${API_PATH_FOLDER + photo}${surname || ''} ${firstname || ''}`}</Text>}
                 left={() => <FontAwesomeIcon icon={faUser} />}
             />
              <List.Item

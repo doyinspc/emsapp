@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Avatar, Button, Card, Text, useTheme } from 'react-native-paper';
 import { customStyles } from '../constants/Styles';
-import { API_PATH_FOLDER } from '../app/db/api';
+import { API_PATH_FOLDER, removeData, storeDataPlain } from '../app/db/api';
 import { Pressable, View } from 'react-native';
 import { router } from 'expo-router';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -14,12 +14,14 @@ import CustomButton from './CustomButton';
 
 const CustomProfileCard = (props) =>{
   
-  const {id:studentid, surname, firstname, middlename, photo, g1_phone1, g1_phone2, g2_phone1, g2_phone2, email, school_data, class_data, term_data } = props.data || ''
+  const {surname, firstname, admission_no, middlename, photo, g1_phone1, g1_phone2, g2_phone1, g2_phone2, email, school_data, class_data, term_data } = props.data || ''
   const {name:schoolname, links} = school_data
   const {sessionname, termid} = term_data
   const {name:classname} = class_data
   const theme = useTheme()
   const {globalParams, updateGlobalParams} = React.useContext(GlobalContext)
+  storeDataPlain('login_text', admission_no);
+  storeDataPlain('phone_text', g1_phone1);
 
   React.useEffect( () => {
     let g = {...globalParams}
@@ -29,6 +31,12 @@ const CustomProfileCard = (props) =>{
     g.term = term_data
     updateGlobalParams(g)
   }, [school_data, class_data, term_data])
+
+  const logOut = () =>{
+      removeData('login_text')
+      removeData('phone_text')
+      router.push('auth')
+  }
 
 
   return <>
@@ -51,36 +59,37 @@ const CustomProfileCard = (props) =>{
   </View>
   <View style={customStyles.menuCard}>
     <Pressable style={customStyles.menuCards} onPress={()=>router.push('screens/school')} >
-      <FontAwesomeIcon color={theme.colors.onPrimary} size='2x' icon={faSchoolFlag} />
+      <FontAwesomeIcon color={theme.colors.onPrimary} size={50} style={{ height: "5rem", fontSize:'3rem' }} icon={faSchoolFlag} />
       <Text style={customStyles.menuCardsText}>About School</Text>
     </Pressable>
     <Pressable style={customStyles.menuCards} onPress={()=>router.push('screens/teacher')}>
-      <FontAwesomeIcon color={theme.colors.onPrimary} size='2x' icon={faChalkboardTeacher} />
+      <FontAwesomeIcon color={theme.colors.onPrimary} size={50} style={{ height: "5rem", fontSize:'3rem' }} icon={faChalkboardTeacher} />
       <Text style={customStyles.menuCardsText}>Class Teacher</Text>
     </Pressable>
     <Pressable style={customStyles.menuCards} onPress={()=>router.push('screens/profile')}>
-    <FontAwesomeIcon color={theme.colors.onPrimary} size='2x' icon={faUser} />
+    <FontAwesomeIcon color={theme.colors.onPrimary} size={50} style={{ height: "5rem", fontSize:'3rem' }} icon={faUser} />
       <Text style={customStyles.menuCardsText}>My Profile</Text>
     </Pressable>
     <Pressable style={customStyles.menuCards} onPress={()=>router.push('screens/report')}>
-    <FontAwesomeIcon color={theme.colors.onPrimary} size='2x' icon={faCalendar} />
+    <FontAwesomeIcon color={theme.colors.onPrimary} size={50} style={{ height: "5rem", fontSize:'3rem' }} icon={faCalendar} />
       <Text style={customStyles.menuCardsText}>Report</Text>
     </Pressable>
     <Pressable style={customStyles.menuCards} onPress={()=>router.push({
       pathname:'screens/subjects', 
       params:{...props.data, claszid:class_data.claszid, claszname:class_data.name, termid:termid} 
       })}>
-      <FontAwesomeIcon color={theme.colors.onPrimary} size='2x' icon={faLightbulb} />
+      <FontAwesomeIcon color={theme.colors.onPrimary} size={50} style={{ height: "5rem", fontSize:'3rem' }} icon={faLightbulb} />
       <Text style={customStyles.menuCardsText}>Subjects</Text>
     </Pressable>
     <Pressable style={customStyles.menuCards} onPress={()=>router.push('screens/notification')}>
-      <FontAwesomeIcon color={theme.colors.onPrimary} size='2x' icon={faBell} />
+      <FontAwesomeIcon color={theme.colors.onPrimary} size={50} style={{ height: "5rem", fontSize:'3rem' }} icon={faBell} />
       <Text style={customStyles.menuCardsText}>Notification</Text>
     </Pressable>
   </View>
   <View style={customStyles.menuCardFooter}>
     <CustomButton
       title = 'Logout'
+      onPress ={()=>logOut()}
     />
   </View>
   </>

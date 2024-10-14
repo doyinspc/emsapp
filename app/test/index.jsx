@@ -1,16 +1,11 @@
-import React, { useEffect, useContext, useState, useMemo } from 'react'
+import React, { useEffect, useContext, useState  } from 'react'
 import { GlobalContext } from '../../components/GlobalContextProvider'
 import Page from '../../components/Page'
-import QuestionBlock from '../../components/QuestionBlock'
-import { Appbar, Caption, Subheading, FAB, useTheme } from 'react-native-paper'
+import { Caption, Subheading } from 'react-native-paper'
 import { customStyles } from '../../constants/Styles'
 import QuestionBlockPage from '../../components/QuestionBlockPage'
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View } from 'react-native'
 import CustomButton from '../../components/CustomButton'
-
-const BOTTOM_APPBAR_HEIGHT = 80;
-const MEDIUM_FAB_HEIGHT = 56
+import { View } from 'react-native'
 
 const Index = () => {
 const [stage, setstage] = useState(true)
@@ -32,7 +27,7 @@ const [stage, setstage] = useState(true)
    if(is_complete){
         setstage(false)
    }else{
-    setstage(true)
+      setstage(true)
    }
  }, [is_complete])
  
@@ -46,12 +41,18 @@ const [stage, setstage] = useState(true)
       <Subheading>{subjectname}</Subheading>
       <Subheading>{`Number of Questions: ${num_of_questions}`}</Subheading>
       <CustomButton title='Start Test' onPress={()=>setstage(prev =>!prev)} />
+      {is_complete ? 
+        <View style={customStyles.rowContainer}>
+          <Text variant="headline">{`SCORE : ${score * 100}%`}</Text>
+        </View>
+      :null}
     </Page>:
       questions && <QuestionBlockPage
             id={questionid}
             questions ={questions}
             answers= {answers}
             is_complete={is_complete}  
+            resetPage={()=>setstage(prev =>!prev)}
       />}
     </>
   )

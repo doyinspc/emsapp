@@ -36,7 +36,8 @@ export const customStyles = StyleSheet.create({
     scrollview:{
         height:'100vh',
         marginVertical:heightPart,
-        marginHorizontal:widthPart
+        marginHorizontal:widthPart,
+        paddingBottom: heightPart
         // justifyContent:'center',
         // alignItems:'center'
     },
@@ -45,18 +46,20 @@ export const customStyles = StyleSheet.create({
         alignItems:'center',
         jusitifyConten:'center',
         paddingTop: StatusBar.currentHeight,
+        backgroundColor:theme.colors.primaryContainer,
     },
     button:{
         alignItems: 'center',
         paddingVertical:5,
         paddingHorizontal:30,
         borderRadius:10,
-        backgroundColor:theme.colors.onSecondaryContainer,
+        backgroundColor:theme.colors.secondary,
         width: widthPart * 20
     },
     labelStyle:{
-        fontSize:'1.5rem',
-        fontFamily:'sourcesansbold'
+        fontSize:'1.2rem',
+        fontFamily:'sourcesansbold',
+        color: theme.colors.onSecondary
     },
     textbox:{
         height: 40,

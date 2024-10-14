@@ -4,6 +4,7 @@ import { axiosConfig, API_PATH } from './api'
 import { insert, selectAll, selectOne, update } from './crud'
 
 export default function useGetHook({db, table, queryType}) {
+    
     const [error, seterror] = useState('')
     const [isLoading, setisLoading] = useState(false)
     const [data, setdata] = useState([])

@@ -21,12 +21,12 @@ const ListReports = (props) => {
   return (
     <>
         {data.map((prop, indx) =>{
-            const {id, title, schoolname, classname} = prop
+            const {id, title, schoolname, classname} = prop || ''
             return  <List.Item
               key={indx}
               title={<Text style={customStyles.listHeader}>{title}</Text>}
-              description={<View><Text>{schoolname}</Text>
-              <Text>{classname}</Text>
+              description={<View><Text>{schoolname || ''}</Text>
+              <Text>{classname || ''}</Text>
               </View>}
               onPress={()=>handlePress(id)}
               left={props => <List.Icon icon={()=><FontAwesomeIcon icon={faFilePdf} />} />}

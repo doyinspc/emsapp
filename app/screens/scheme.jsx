@@ -8,6 +8,7 @@ import PageFixed from '../../components/PageFixed';
 import { View } from 'react-native';
 import { GlobalContext } from '../../components/GlobalContextProvider';
 import { Appbar, List } from 'react-native-paper';
+import Page from '../../components/Page';
 
 const Schemes = () => {
 
@@ -19,8 +20,6 @@ const Schemes = () => {
     const {termid} = term || ''
     const {id:studentid} = student || ''
     const {claszid} = clasz || ''
-   console.log(subjectid)
-    
     
     let db = ''
     const {data, isLoading, error, msg, load} = useGetHook({db, table:'students', queryType:'select_active_schemes'})
@@ -62,12 +61,11 @@ const Schemes = () => {
         <Appbar.Header>
             <Appbar.BackAction onPress={()=>router.replace('./auth')} />
             <Appbar.Content titleStyle={customStyles.headerTitleStyle} title ={subjectname} />
-            <Appbar.Action icon='home' onPress={()=>handleSubmit()} />
+            <Appbar.Action icon='home' onPress={()=>router.push("auth")} />
             <Appbar.Action icon='refresh' onPress={()=>handleSubmit()} />
         </Appbar.Header>
         <React.Suspense fallback={<Loading />}>
-        <View style={customStyles.ListPage}>
-        <View style={customStyles.ListPageTop}>
+        <Page>
             {!isLoading ?
             <>
             {schemes 
@@ -78,8 +76,7 @@ const Schemes = () => {
             {msg && <Text>{msg}</Text>}
             </>:
             <Loading />} 
-        </View>
-    </View>
+        </Page>
     </React.Suspense>
     </PageFixed>
 )};

@@ -8,7 +8,7 @@ export default function CustomButton(props) {
   return (
     <Button
         style={{...customStyles.button}}
-        labelStyle={{...labelStyle}}
+        labelStyle={{...customStyles.labelStyle}}
         icon={icon || "camera" }
         mode="contained" 
         loading={isLoading}

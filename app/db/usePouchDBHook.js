@@ -1,13 +1,8 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function usePouchDBHook() {
-  return (
-    <View>
-      <Text>usePouchDBHook</Text>
-    </View>
-  )
-}
+// export default function usePouchDBHook() {
+//   return {}
+// }
 // import { useCallback, useState } from 'react'
 // import { create_td, open_td } from './PouchDB'
 // import defaultTables  from './table'

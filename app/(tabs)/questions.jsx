@@ -46,8 +46,9 @@ const questions = () => {
             <Appbar.Action icon='refresh' onPress={()=>handleSubmit()} />
             <Appbar.Action icon='plus' onPress={()=>handleLoadQuestion()} />
         </Appbar.Header>
-      <Caption style={customStyles.caption}>{tname}</Caption>
+      
       <Page>
+      <Caption style={customStyles.caption}>{tname}</Caption>
       {!isLoading ?
         <>
         {data 

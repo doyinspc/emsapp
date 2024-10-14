@@ -4,7 +4,6 @@ import { customStyles } from '../../constants/Styles'
 import { Button, TextInput, Text } from 'react-native-paper'
 import CustomButton from '../CustomButton'
 import Loading from '../Loading'
-import PageFixed from '../PageFixed'
 import Page from '../Page'
 
 
@@ -13,7 +12,6 @@ const Signin = (props) => {
   return (
     <React.Suspense fallback={<Loading />} >
     <Page>
-      
       <View style={customStyles.textContainer}>
         <View>
           <Text style={customStyles.headerbox} variant="headlineLarge">Login</Text>
@@ -24,13 +22,13 @@ const Signin = (props) => {
         <TextInput
           style={customStyles.textbox}
           label="Matriculation Number"
-          value={text}
+          text={text}
           onChangeText={text => props.setText(text)}
         />
       <TextInput
        style={customStyles.textbox}
         label="Phone Number"
-        value={phone}
+        phone={phone}
         onChangeText={text => props.setPhone(text)}
       /> 
       <CustomButton 

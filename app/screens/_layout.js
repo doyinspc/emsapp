@@ -23,6 +23,7 @@ const _layout = () => {
           <Stack.Screen name="report" options={{headerShown:false}} />
           <Stack.Screen name="profile" options={{headerShown:false}} />
           <Stack.Screen name="teacher" options={{headerShown:false}} />
+          <Stack.Screen name="notedata" options={{headerShown:false}} />
            <Stack.Screen name="(tabs)" options={{headerShown:false}} />
     </Stack>
   )

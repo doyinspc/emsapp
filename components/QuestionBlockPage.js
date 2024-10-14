@@ -51,7 +51,6 @@ const  QuestionBlockPage = (props) => {
         setrows(rows)
         setnumbers(numb)
         setactive_number(numb[0])
-        console.log(work)
         if(score > 0) setanswer(JSON.parse(work))
     }, [questions])
     const onNext= () =>{
@@ -93,7 +92,10 @@ const  QuestionBlockPage = (props) => {
         let saved_q = {...saved_question}
         saved_q['score'] = score;
         saved_q['work'] = JSON.stringify(answer);
-        await updateGlobalParams(saved_q)
+        let store = {...globalParams}
+        store.question = saved_q
+        await updateGlobalParams(store)
+        props.resetPage()
     }
 
     const { bottom } = useSafeAreaInsets();

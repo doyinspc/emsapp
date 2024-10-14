@@ -12,6 +12,7 @@ const Index = () => {
  const {globalParams, updateGlobalParams} = useContext(GlobalContext)
  const {note} = globalParams || {}
  const { title, typeid, note:notedata } = note
+ console.log(note)
   return (
     <PageFixed>
       <Appbar.Header>
